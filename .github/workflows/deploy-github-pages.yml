@@ -1,0 +1,32 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main] # Hangi branch'e push yapıldığında bu workflow çalışacak? Genellikle 'main' veya 'master' kullanılır.
+  workflow_dispatch: 
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: npm install # veya yarn install
+
+      - name: Build project
+        run: npm run build # veya yarn build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages # Yayınlanacak branch (genellikle 'gh-pages' kullanılır)
+          folder: dist # Build çıktısının olduğu klasör (Vite varsayılanı 'dist')
