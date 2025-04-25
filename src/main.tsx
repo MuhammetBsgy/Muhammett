@@ -9,7 +9,7 @@ import Contact from "./screen/Contact";
 import Home from "./screen/Home";
 
 createRoot(document.getElementById("root")!).render(
-  <BrowserRouter basename="/<Muhammett>">
+  <BrowserRouter basename="/MuhammetBsgy/Muhammett">
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
